@@ -1,2 +1,7 @@
-# jk-overlay
-Overlay app for easy, harmless pranks.
+
+# JK Overlay
+
+Desktop app for _simple_ & **harmless** pranks.
+
+Current Overlays:
+ - [Bugs](https://github.com/Auz/Bug)
