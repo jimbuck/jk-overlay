@@ -65,6 +65,11 @@ app.on('window-all-closed', function () {
     app.quit();
 });
 
+//on OSx a dock icon is shown, since this is a tray application, hide the dock icon.
+if (app.dock) {
+    app.dock.hide();
+}
+
 function overlayChanged({label}, window, event) {
 
     // Stop here if it is already selected...
