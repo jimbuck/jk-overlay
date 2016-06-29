@@ -15,14 +15,17 @@ export class SnowStormOverlay extends BaseOverlay {
     init() {
         //Initialize snowstorm so that it doesn't auto-start.
         snowStorm.autoStart = false;
-        snowStorm.toggleSnow();
+        snowStorm.stop();
+        snowStorm.freeze();
     }
 
     start() {
-        snowStorm.toggleSnow();
+        snowStorm.show();
+        snowStorm.resume();
     }
 
     stop() {
-        snowStorm.toggleSnow();
+        snowStorm.stop();
+        snowStorm.freeze();
     }
 }
