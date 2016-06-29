@@ -1,5 +1,5 @@
 import { ipcRenderer } from 'electron';
-import { OVERLAYS, OVERLAY_CHANGED_EVENT } from './overlays/overlays'; // code authored by you in this project
+import { OVERLAYS, OVERLAY_INITIALIZE_EVENT, OVERLAY_CHANGED_EVENT } from './overlays/overlays'; // code authored by you in this project
 import env from './env';
 
 console.log('Loaded environment variables:', env);
@@ -11,9 +11,20 @@ let currentOverlay = {
   stop: function () { }
 };
 
+ipcRenderer.once(OVERLAY_INITIALIZE_EVENT, (event, name) => {
+  initializeOverlays();
+});
+
 ipcRenderer.on(OVERLAY_CHANGED_EVENT, (event, name) => {
   switchOverlays(name);
 });
+
+function initializeOverlays() {
+  for (let overlay of OVERLAYS) {
+    if (overlay.init)
+      overlay.init();
+  }
+}
 
 function switchOverlays(name) {
   if (currentOverlay.name === name) return;
