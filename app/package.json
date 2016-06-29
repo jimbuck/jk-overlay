@@ -21,6 +21,12 @@
     }
   },
   "scripts": {
-    "postinstall": "node ../tasks/rebuild_native_modules"
+    "postinstall": "cd app && npm install",
+    "build": "gulp build",
+    "release": "gulp release --env=production",
+    "start": "gulp start",
+    "pretest": "gulp build --env=test",
+    "test": "electron-mocha build --renderer",
+    "install-native": "node ./tasks/install_native_module"
   }
 }

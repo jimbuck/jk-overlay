@@ -1,5 +1,5 @@
 
-import Path from 'path';
+import path from 'path';
 import { app, screen, Menu, Tray } from 'electron';
 import createWindow from './helpers/window';
 
@@ -43,7 +43,7 @@ app.on('ready', function () {
         { label: 'Close', role: 'close', click: () => mainWindow.close() }
     ]);
 
-    tray = new Tray(Path.join(__dirname, '/icon.png'));
+    tray = new Tray(path.join(__dirname, '/icon.png'));
     tray.setToolTip('JK Overlay');
     tray.setContextMenu(contextMenu);
 

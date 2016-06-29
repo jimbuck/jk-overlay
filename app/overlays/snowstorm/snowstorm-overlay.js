@@ -13,13 +13,12 @@ export class SnowStormOverlay extends BaseOverlay {
     }
 
     init() {
-        //Default behavior of snowstorm.js is to auto-start. Stop it.
-        snowStorm.stop();
-        snowStorm.freeze();
+        snowStorm.freezeOnBlur = false;
+        snowStorm.flakesMaxActive = 96;    // show more snow on screen at once
+        snowStorm.useTwinkleEffect = true;
     }
 
     start() {
-        //timing -- snowstorm might not have initialized. Ensure that it is.
         if (!snowStorm.active) {
             snowStorm.start();
         }
