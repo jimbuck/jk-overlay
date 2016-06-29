@@ -13,15 +13,20 @@ export class SnowStormOverlay extends BaseOverlay {
     }
 
     init() {
-        //Initialize snowstorm so that it doesn't auto-start.
-        snowStorm.autoStart = false;
+        //Default behavior of snowstorm.js is to auto-start. Stop it.
         snowStorm.stop();
         snowStorm.freeze();
     }
 
     start() {
-        snowStorm.show();
-        snowStorm.resume();
+        //timing -- snowstorm might not have initialized. Ensure that it is.
+        if (!snowStorm.active) {
+            snowStorm.start();
+        }
+        else {
+            snowStorm.show();
+            snowStorm.resume();
+        }
     }
 
     stop() {
