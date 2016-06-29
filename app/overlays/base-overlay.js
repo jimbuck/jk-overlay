@@ -2,12 +2,11 @@
 
 
 
-export class BaseOverlay
-{
+export class BaseOverlay {
   constructor() {
-    
-  }
 
+  }
+  
   start() {
     throw new Error(`Not yet implemented!`);
   }

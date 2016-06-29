@@ -1,11 +1,13 @@
 
+import Path from 'path';
 import { app, screen, Menu, Tray } from 'electron';
 import createWindow from './helpers/window';
 
 // Special module holding environment variables which you declared in config/env_xxx.json file.
 import env from './env';
 
-import {OVERLAYS, OVERLAY_CHANGED_EVENT} from './overlays/overlays';
+import {OVERLAYS, OVERLAY_INITIALIZE_EVENT, OVERLAY_CHANGED_EVENT} from './overlays/overlays';
+
 
 let mainWindow;
 let tray;
@@ -41,7 +43,7 @@ app.on('ready', function () {
         { label: 'Close', role: 'close', click: () => mainWindow.close() }
     ]);
 
-    tray = new Tray(__dirname + '/icon.ico');
+    tray = new Tray(Path.join(__dirname, '/icon.png'));
     tray.setToolTip('JK Overlay');
     tray.setContextMenu(contextMenu);
 
@@ -52,6 +54,7 @@ app.on('ready', function () {
 
     mainWindow.once('ready-to-show', () => {
         mainWindow.show();
+        triggerInitialize();
         triggerOverlay();
     });
 
@@ -72,6 +75,10 @@ function overlayChanged({label}, window, event) {
 
     // Send the new overlay setting to the render process...
     triggerOverlay();
+}
+
+function triggerInitialize() {
+    mainWindow.webContents.send(OVERLAY_INITIALIZE_EVENT);
 }
 
 function triggerOverlay() {
