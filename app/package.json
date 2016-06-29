@@ -19,14 +19,5 @@
       "MAS": "3rd Party Mac Developer Application: Company Name (APPIDENTITY)",
       "MASInstaller": "3rd Party Mac Developer Installer: Company Name (APPIDENTITY)"
     }
-  },
-  "scripts": {
-    "postinstall": "cd app && npm install",
-    "build": "gulp build",
-    "release": "gulp release --env=production",
-    "start": "gulp start",
-    "pretest": "gulp build --env=test",
-    "test": "electron-mocha build --renderer",
-    "install-native": "node ./tasks/install_native_module"
   }
 }
