@@ -57,12 +57,10 @@ app.on('ready', function () {
     tray.setToolTip('JK Overlay');
     tray.setContextMenu(contextMenu);
 
-    var {width, height} = screen.getPrimaryDisplay().size;
-
-    mainWindow.setIgnoreMouseEvents(true);
-    mainWindow.setBounds({ x: 0, y: 0, width, height }, false);
-
     mainWindow.once('ready-to-show', () => {
+        var {width, height} = screen.getPrimaryDisplay().size;
+        mainWindow.setIgnoreMouseEvents(true);
+        mainWindow.setBounds({ x: 0, y: 0, width, height }, false);
         mainWindow.show();
         mainWindow.setSkipTaskbar(true);
         triggerInitialize();

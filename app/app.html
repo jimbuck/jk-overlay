@@ -11,8 +11,14 @@
     <script src="helpers/external_links.js"></script>
 
     <!-- Load external libraries go here... -->
+    <script>
+        // Looks crazy, but this is how electron likes it!
+        var jQuery = $ = require('jquery');
+    </script>
+
     <script src="overlays/snowstorm/snowstorm.js"></script>
     <script src="overlays/bugs/bugs.js"></script>
+    <script src="overlays/fireworks/fireworks.js"></script>
 
     <!-- Trigger app library here... -->
     <script src="app.js"></script>
