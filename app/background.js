@@ -46,7 +46,7 @@ app.on('ready', function () {
         { label: 'JK Overlay' },
         { role: 'separator' },
         { label: 'Overlays', submenu: overlayOptions },
-        { label: 'Close', role: 'close', click: () => mainWindow.close() }
+        { label: 'Close', click: () => mainWindow.close() }
     ]);
 
     tray = new Tray(path.join(__dirname, '/icon.png'));
