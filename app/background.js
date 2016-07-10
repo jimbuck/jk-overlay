@@ -20,6 +20,9 @@ let tray;
 // Load the last overlay, if available. Otherwise load the first one (should be "None").
 let currentOverlayName = config.get(CURRENT_OVERLAY_KEY) || OVERLAYS[0].name;
 
+// Ensure there are no extra instaces running...
+checkOtherInstances();
+
 app.on('ready', function () {
     Menu.setApplicationMenu(null);
 
@@ -74,6 +77,17 @@ app.on('window-all-closed', function () {
 //on OSx a dock icon is shown, since this is a tray application, hide the dock icon.
 if (app.dock) {
     app.dock.hide();
+}
+
+function checkOtherInstances() {
+    const alreadyRunning = app.makeSingleInstance(() => {
+        // Do nothing if multiple instances are up...
+    });
+
+    if (alreadyRunning) {
+        app.quit();
+        return;
+    }
 }
 
 function overlayChanged({label}, window, event) {
