@@ -33,7 +33,8 @@ app.on('ready', function () {
         alwaysOnTop: true,
         minimizable: false,
         focusable: false,
-        movable: false
+        movable: false,
+        skipTaskbar: true
     });
 
     var overlayOptions = OVERLAYS.map(overlay => {
@@ -63,6 +64,7 @@ app.on('ready', function () {
 
     mainWindow.once('ready-to-show', () => {
         mainWindow.show();
+        mainWindow.setSkipTaskbar(true);
         triggerInitialize();
         triggerOverlay();
     });
