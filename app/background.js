@@ -3,16 +3,22 @@ import path from 'path';
 import { app, screen, Menu, Tray } from 'electron';
 import createWindow from './helpers/window';
 
+import Config from 'electron-config';
+
 // Special module holding environment variables which you declared in config/env_xxx.json file.
 import env from './env';
 
 import {OVERLAYS, OVERLAY_INITIALIZE_EVENT, OVERLAY_CHANGED_EVENT} from './overlays/overlays';
 
 
+const config = new Config();
+const CURRENT_OVERLAY_KEY = 'CurrentOverlay';
+
 let mainWindow;
 let tray;
 
-let currentOverlayName = 'Bugs';
+// Load the last overlay, if available. Otherwise load the first one (should be "None").
+let currentOverlayName = config.get(CURRENT_OVERLAY_KEY) || OVERLAYS[0].name;
 
 app.on('ready', function () {
     Menu.setApplicationMenu(null);
@@ -77,6 +83,9 @@ function overlayChanged({label}, window, event) {
 
     // Store it for later checks...    
     currentOverlayName = label;
+
+    // Persist it for later...
+    config.set(CURRENT_OVERLAY_KEY, currentOverlayName);
 
     // Send the new overlay setting to the render process...
     triggerOverlay();

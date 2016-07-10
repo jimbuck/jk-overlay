@@ -6,9 +6,9 @@ import {NoneOverlay} from './none/none-overlay';
 
 // Add additional overlays here...
 export const OVERLAYS = [
+    new NoneOverlay(), // Always keep 'None' at the top.
     new BugsOverlay(),
-    new SnowStormOverlay(),
-    new NoneOverlay()
+    new SnowStormOverlay()
 ];
 
 // Share event name between main thread and render thread.
