@@ -1,8 +1,8 @@
 {
   "name": "jk-overlay",
   "productName": "JK Overlay",
-  "description": "Overlay app for easy, harmless pranks.",
   "version": "0.1.0",
+  "description": "jk-overlay",
   "author": "JimmyBoh",
   "copyright": "© 2016, JimmyBoh",
   "main": "background.js",
