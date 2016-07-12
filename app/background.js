@@ -11,7 +11,7 @@ import env from './env';
 import {OVERLAYS, OVERLAY_INITIALIZE_EVENT, OVERLAY_CHANGED_EVENT} from './overlays/overlays';
 
 
-const config = new Config();
+const config = new Config({ projectName: 'jk-overlay' });
 const CURRENT_OVERLAY_KEY = 'CurrentOverlay';
 
 let mainWindow;
@@ -48,7 +48,7 @@ app.on('ready', function () {
 
     var contextMenu = Menu.buildFromTemplate([
         { label: 'JK Overlay' },
-        { role: 'separator' },
+        { type: 'separator' },
         { label: 'Overlays', submenu: overlayOptions },
         { label: 'Close', click: () => mainWindow.close() }
     ]);
