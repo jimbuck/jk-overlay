@@ -12,7 +12,7 @@ import {OVERLAYS, OVERLAY_INITIALIZE_EVENT, OVERLAY_CHANGED_EVENT} from './overl
 
 
 const config = new Config({ projectName: 'jk-overlay' });
-const CURRENT_OVERLAY_KEY = 'CurrentOverlay';
+const CURRENT_OVERLAY_KEY = 'data.currentOverlay'; // data should be prefixed with `data.` and settings with `settings.`.
 
 let mainWindow;
 let tray;
