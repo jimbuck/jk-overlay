@@ -1,5 +1,5 @@
 /**
- * Canvas Fireworks (slightly modified: removed GUI controls, added shoot random method)
+ * Canvas Fireworks (slightly modified: removed GUI controls, added shoot random method, multiple launch points)
  * Originally created by Jack Rugile (July 28, 2012) https://codepen.io/jackrugile/pen/acAgx
  * MIT Licensed
  * Used with permission: https://twitter.com/jackrugile/status/748213342284570624
@@ -32,6 +32,7 @@ var Fireworks = function () {
 		self.canvas.width = self.cw = self.canvasContainer.width();
 		self.canvas.height = self.ch = self.canvasContainer.height();	
 		
+		self.launchPoints = 1;
 		self.particles = [];	
 		self.partCount = 30;
 		self.fireworks = [];	
@@ -339,25 +340,28 @@ var Fireworks = function () {
 		});
 					
 	}
-	
+
 	/*=============================================================================*/
-	self.shoot = function(pos){
-		if(!pos){
-			var w = self.canvasContainer.width();
-			var h = self.canvasContainer.height();
+	self.shoot = function (pos) {
+		var launcherRange = self.cw / (self.launchPoints + 1);
+		var launcher;
+
+		if (!pos) {
+			launcher = Math.floor(Math.random() * self.launchPoints) + 1;
 			pos = {
-				x: rand(w*0.1, w*0.9),
-				y: rand(h*0.1, h*0.9)
+				x: rand((launcher - 0.5) * launcherRange, (launcher + 0.5) * launcherRange),
+				y: rand(self.ch * 0.1, self.ch * 0.8)
 			};
+		} else {
+			launcher = Math.floor(self.launchPoints * (pos.x / self.cw));
 		}
 		
-		var randLaunch = rand(0, 5);
-		var w = self.canvasContainer.width();
-		var h = self.canvasContainer.height();
+		var hStart = (self.cw / (self.launchPoints + 1)) * launcher;
+
 		self.mx = pos.x;
 		self.my = pos.y;
 		self.currentHue = rand(self.hueMin, self.hueMax);
-		self.createFireworks(self.cw/2, self.ch, self.mx, self.my);	
+		self.createFireworks(hStart, self.ch, self.mx, self.my);	
 	}
 	
 	/*=============================================================================*/	
